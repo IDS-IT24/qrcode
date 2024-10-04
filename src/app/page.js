@@ -1,95 +1,76 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState } from 'react';
+import QRCode from 'react-qr-code';
+import { db } from '../firebase'; // Assuming firebase.js is in the src directory
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [url, setUrl] = useState('');
+  const [shortLink, setShortLink] = useState('');
+  const [password, setPassword] = useState('');
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const handleSubmit = async () => {
+    let formattedUrl = url;
+
+    // Ensure the URL has http:// or https://
+    if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+      formattedUrl = `http://${formattedUrl}`; // Add http:// if the protocol is missing
+    }
+
+    const slug = Math.random().toString(36).substring(2, 8); // Generate a random slug
+    const localIP = 'http://192.168.0.112:3000'; // Replace this with your actual local IP
+    const newLink = `${localIP}/${slug}`;
+    
+    // Store URL, password, and slug in Firestore
+    try {
+      await addDoc(collection(db, 'urls'), {
+        slug: slug,
+        originalUrl: formattedUrl, // Save the formatted URL with protocol
+        password: password, // Save password along with the URL
+      });
+      setShortLink(newLink);
+    } catch (error) {
+      console.error('Error storing URL: ', error);
+    }
+  };
+
+  return (
+    <div className="container text-center mt-5">
+      <div className="row justify-content-center mt-4">
+        <div className="col-12 col-md-8 col-lg-6">
+          <input
+            type="text"
+            placeholder="Enter URL"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            className="form-control mb-3"
+          />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="form-control mb-3"
+          />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="col-12 col-md-4 col-lg-2">
+          <button onClick={handleSubmit} className="btn btn-success btn-block">
+            Shorten URL
+          </button>
+        </div>
+      </div>
+
+      {shortLink && (
+        <div className="mt-5">
+          <p className="lead">
+            Shortened Link: <a href={shortLink} target="_blank" rel="noreferrer">{shortLink}</a>
+          </p>
+          <div className="d-flex justify-content-center mt-3">
+            <QRCode value={shortLink} size={256} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
