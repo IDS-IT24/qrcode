@@ -19,7 +19,7 @@ export default function Home() {
     }
 
     const slug = Math.random().toString(36).substring(2, 8); // Generate a random slug
-    const localIP = 'http://192.168.0.112:3000'; // Replace this with your actual local IP
+    const localIP = 'https://qrcode-ids.vercel.app'; // Replace this with your actual local IP
     const newLink = `${localIP}/${slug}`;
     
     // Store URL, password, and slug in Firestore
