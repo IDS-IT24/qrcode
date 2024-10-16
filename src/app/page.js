@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import QRCode from 'react-qr-code';
-import { db } from '../firebase'; // Assuming firebase.js is in the src directory
+import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
 
     // Ensure the URL has http:// or https://
     if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
-      formattedUrl = `http://${formattedUrl}`; // Add http:// if the protocol is missing
+      formattedUrl = `http://${formattedUrl}`;
     }
 
     const slug = Math.random().toString(36).substring(2, 8); // Generate a random slug
@@ -112,20 +112,23 @@ export default function Home() {
 
       {shortLink && (
         <div className="mt-5">
-          <p className="lead">
-            Shortened Link: <a href={shortLink} target="_blank" rel="noreferrer">{shortLink}</a>
-          </p>
-          <div className="d-flex justify-content-center mt-3">
-            <QRCode value={shortLink} size={256} />
-          </div>
+          {/* Only the below section will be printed */}
+          <div className="print-section">
+            <p className="lead">
+              Shortened Link: <a href={shortLink} target="_blank" rel="noreferrer">{shortLink}</a>
+            </p>
+            <div className="d-flex justify-content-center mt-3">
+              <QRCode value={shortLink} size={256} />
+            </div>
 
-          <div className="mt-4 text-start">
-            <h4>Details</h4>
-            <p><strong>Divisi:</strong> {divisi}</p>
-            <p><strong>Unit:</strong> {unit}</p>
-            <p><strong>Customer:</strong> {customer}</p>
-            <p><strong>SOA:</strong> {soa}</p>
-            <p><strong>SO:</strong> {so}</p>
+            <div className="mt-4 text-start">
+              <h4>Details</h4>
+              <p><strong>Divisi:</strong> {divisi}</p>
+              <p><strong>Unit:</strong> {unit}</p>
+              <p><strong>Customer:</strong> {customer}</p>
+              <p><strong>SOA:</strong> {soa}</p>
+              <p><strong>SO:</strong> {so}</p>
+            </div>
           </div>
 
           <button onClick={handlePrint} className="btn btn-primary mt-3">
