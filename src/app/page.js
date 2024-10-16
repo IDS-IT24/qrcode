@@ -114,20 +114,16 @@ export default function Home() {
         <div className="mt-5">
           {/* Only the below section will be printed */}
           <div className="print-section">
-            <p className="lead">
-              Shortened Link: <a href={shortLink} target="_blank" rel="noreferrer">{shortLink}</a>
-            </p>
             <div className="d-flex justify-content-center mt-3">
               <QRCode value={shortLink} size={128} className="qrcode" />
-            </div>
-
-            <div className="mt-4 text-start">
-              <h4>Details</h4>
-              <p><strong>Divisi:</strong> {divisi}</p>
-              <p><strong>Unit:</strong> {unit}</p>
-              <p><strong>Customer:</strong> {customer}</p>
-              <p><strong>SOA:</strong> {soa}</p>
-              <p><strong>SO:</strong> {so}</p>
+              <div className="mt-4 text-start">
+                <h4>Details</h4>
+                <p><strong>Divisi:</strong> {divisi}</p>
+                <p><strong>Unit:</strong> {unit}</p>
+                <p><strong>Customer:</strong> {customer}</p>
+                <p><strong>SOA:</strong> {soa}</p>
+                <p><strong>SO:</strong> {so}</p>
+              </div>
             </div>
           </div>
 
