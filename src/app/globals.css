@@ -11,18 +11,45 @@
 }
 
 @media print {
+  /* Set the paper size to 70mm x 50mm */
+  @page {
+    size: 70mm 50mm;
+    margin: 0;
+  }
+
+  /* Ensure all other elements are hidden except the QR code and details */
   body * {
     visibility: hidden;
   }
+
   .print-section, .print-section * {
     visibility: visible;
   }
+
   .print-section {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+    width: 70mm;
+    height: 50mm;
+    padding: 5mm;
+    box-sizing: border-box;
+    font-size: 10px; /* Adjust font size to fit the small sticker */
+  }
+
+  /* Adjust QR code size for small sticker */
+  .print-section .qrcode {
+    width: 30mm;
+    height: 30mm;
+    margin-bottom: 5mm;
+  }
+
+  /* Prevent page breaks inside the printable section */
+  .print-section {
+    page-break-inside: avoid;
   }
 }
+
 
 
 html,

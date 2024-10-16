@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import QRCode from 'react-qr-code';
-import { db } from '../firebase';
+import { db } from '../firebase'; // Assuming firebase.js is in the src directory
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
@@ -118,7 +118,7 @@ export default function Home() {
               Shortened Link: <a href={shortLink} target="_blank" rel="noreferrer">{shortLink}</a>
             </p>
             <div className="d-flex justify-content-center mt-3">
-              <QRCode value={shortLink} size={256} />
+              <QRCode value={shortLink} size={128} className="qrcode" />
             </div>
 
             <div className="mt-4 text-start">
