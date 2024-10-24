@@ -119,9 +119,9 @@ export default function Home() {
               <image className='logo-icon'>{icon}</image>
               <p><strong>Cust: {customer}</strong></p>
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex">
               <QRCode value={shortLink} size={128} className="qrcode" />
-              <div className="mx-1 text-start">
+              <div className="mx-1">
                 <p><strong>Divisi:</strong> {divisi}</p>
                 <p><strong>Unit:</strong> {unit}</p>
                 <p><strong>SOA:</strong> {soa}</p>
