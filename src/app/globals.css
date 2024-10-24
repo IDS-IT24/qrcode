@@ -44,12 +44,6 @@
     margin-bottom: 0mm;
   }
 
-  .print-section .qr-container {
-    width: 20mm;
-    height: 20mm;
-    margin-bottom: 0mm;
-  }
-
   /* Prevent page breaks inside the printable section */
   .print-section {
     page-break-inside: avoid;
