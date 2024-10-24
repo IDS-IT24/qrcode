@@ -11,13 +11,12 @@
 }
 
 @media print {
-  /* Set the paper size to 70mm x 50mm */
   @page {
     size: 50mm 30mm;
     margin: 0;
   }
 
-  /* Ensure all other elements are hidden except the QR code and details */
+  /* Hide everything except the print section */
   body * {
     visibility: hidden;
   }
@@ -34,29 +33,32 @@
     height: 30mm;
     padding: 1mm;
     box-sizing: border-box;
-    font-size: 8px; /* Adjust font size to fit the small sticker */
+    font-size: 8px; /* Font size to fit the small label */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* Adjust QR code size for small sticker */
+  /* QR Code adjustment */
   .print-section .qrcode {
     width: 20mm;
     height: 20mm;
-    margin-bottom: 0mm;
+    margin-bottom: 1mm;
   }
 
-  /* Prevent page breaks inside the printable section */
+  /* Prevent page breaks */
   .print-section {
     page-break-inside: avoid;
   }
 
-  .print-section .logo-icon{
+  .print-section .logo-icon {
     width: 6px;
     height: 6px;
   }
 }
 
-
-
+/* General body styling */
 html,
 body {
   max-width: 100vw;
@@ -77,16 +79,19 @@ body {
   margin: 0;
 }
 
+/* Paragraph styling */
 p {
   margin-bottom: 0 !important;
 }
 
+/* Link styling */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-.logo-icon{
+/* Icon styling */
+.logo-icon {
   width: 6px;
   height: 6px;
 }
