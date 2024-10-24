@@ -34,7 +34,7 @@
     height: 30mm;
     padding: 1mm;
     box-sizing: border-box;
-    font-size: 9px; /* Adjust font size to fit the small sticker */
+    font-size: 8px; /* Adjust font size to fit the small sticker */
   }
 
   /* Adjust QR code size for small sticker */
