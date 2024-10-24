@@ -13,7 +13,7 @@
 @media print {
   /* Set the paper size to 70mm x 50mm */
   @page {
-    size: 70mm 50mm;
+    size: 50mm 30mm;
     margin: 0;
   }
 
