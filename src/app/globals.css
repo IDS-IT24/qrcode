@@ -34,13 +34,13 @@
     height: 30mm;
     padding: 1mm;
     box-sizing: border-box;
-    font-size: 6px; /* Adjust font size to fit the small sticker */
+    font-size: 5px; /* Adjust font size to fit the small sticker */
   }
 
   /* Adjust QR code size for small sticker */
   .print-section .qrcode {
-    width: 30mm;
-    height: 30mm;
+    width: 20mm;
+    height: 20mm;
     margin-bottom: 2mm;
   }
 
