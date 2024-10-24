@@ -58,6 +58,12 @@
 
 
 html,
+
+.qr-container {
+  width: 20mm;
+  height: 20mm;
+  margin-bottom: 0mm;
+}
 body {
   max-width: 100vw;
   overflow-x: hidden;
