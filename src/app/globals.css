@@ -12,11 +12,11 @@
 
 @media print {
   @page {
-    size: 50mm 30mm;
-    margin: 0;
+    size: 50mm 30mm; /* Define exact label size */
+    margin: 0;       /* No margin */
   }
 
-  /* Hide everything except the print section */
+  /* Hide all elements except the print section */
   body * {
     visibility: hidden;
   }
@@ -25,29 +25,31 @@
     visibility: visible;
   }
 
+  /* Define exact label area and enforce no overflow */
   .print-section {
     position: absolute;
     top: 0;
     left: 0;
     width: 50mm;
     height: 30mm;
-    padding: 1mm;
+    padding: 0mm;     /* No padding */
     box-sizing: border-box;
-    font-size: 8px; /* Font size to fit the small label */
+    font-size: 8px;   /* Font size for small sticker */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Prevent content overflow */
   }
 
-  /* QR Code adjustment */
+  /* Adjust QR code size to fit in the label */
   .print-section .qrcode {
     width: 20mm;
     height: 20mm;
     margin-bottom: 1mm;
   }
 
-  /* Prevent page breaks */
+  /* Prevent page breaks within the label */
   .print-section {
     page-break-inside: avoid;
   }
