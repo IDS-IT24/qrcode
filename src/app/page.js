@@ -116,7 +116,7 @@ export default function Home() {
           <div className="print-section">
             <div className="d-flex justify-content-center mt-3">
               <QRCode value={shortLink} size={128} className="qrcode" />
-              <div className="mt-4 text-start">
+              <div className="text-start">
                 <p><strong>Divisi:</strong> {divisi}</p>
                 <p><strong>Unit:</strong> {unit}</p>
                 <p><strong>Customer:</strong> {customer}</p>
@@ -125,7 +125,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
           <button onClick={handlePrint} className="btn btn-primary mt-3">
             Print Info & QR
           </button>

@@ -30,11 +30,11 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 70mm;
-    height: 50mm;
+    width: 50mm;
+    height: 30mm;
     padding: 5mm;
     box-sizing: border-box;
-    font-size: 10px; /* Adjust font size to fit the small sticker */
+    font-size: 8px; /* Adjust font size to fit the small sticker */
   }
 
   /* Adjust QR code size for small sticker */
