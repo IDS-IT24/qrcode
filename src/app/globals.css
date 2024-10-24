@@ -48,6 +48,11 @@
   .print-section {
     page-break-inside: avoid;
   }
+
+  .print-section .logo-icon{
+    width: 6px;
+    height: 6px;
+  }
 }
 
 

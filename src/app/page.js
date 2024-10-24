@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import QRCode from 'react-qr-code';
 import { db } from '../firebase'; // Assuming firebase.js is in the src directory
 import { collection, addDoc } from 'firebase/firestore';
+import {icon} from '../app/ids-icon.png';
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -115,14 +116,16 @@ export default function Home() {
           {/* Only the below section will be printed */}
           <div className="print-section">
             <div className="">
-              <p><strong>{so}</strong></p>
+              <image className='logo-icon'>{icon}</image>
+              <p><strong>Cust: {customer}</strong></p>
             </div>
             <div className="d-flex justify-content-center">
               <QRCode value={shortLink} size={128} className="qrcode" />
               <div className="mx-1 text-start">
                 <p><strong>Divisi:</strong> {divisi}</p>
-                <p><strong>Customer:</strong> {customer}</p>
                 <p><strong>Unit:</strong> {unit}</p>
+                <p><strong>SOA:</strong> {soa}</p>
+                <p><strong>SO:</strong> {so}</p>
               </div>
             </div>
           </div>
