@@ -114,8 +114,7 @@ export default function Home() {
         <div className="mt-5">
           {/* Only the below section will be printed */}
           <div className="print-section">
-            <div className="">
-              <image className='logo-icon' src='./ids-icon.png' />
+            <div>
               <p><strong>Cust: {customer}</strong></p>
             </div>
             <div className="d-flex">
