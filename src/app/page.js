@@ -115,13 +115,14 @@ export default function Home() {
           {/* Only the below section will be printed */}
           <div className="print-section">
             <div className="d-flex justify-content-center mt-3">
-              <QRCode value={shortLink} size={128} className="qrcode" />
-              <div className="text-start">
-                <p><strong>Divisi:</strong> {divisi}</p>
-                <p><strong>Unit:</strong> {unit}</p>
-                <p><strong>Customer:</strong> {customer}</p>
-                <p><strong>SOA:</strong> {soa}</p>
+              <div>
                 <p><strong>SO:</strong> {so}</p>
+              </div>
+              <QRCode value={shortLink} size={128} className="qrcode" />
+              <div className="ml-1 text-start">
+                <p><strong>Divisi:</strong> {divisi}</p>
+                <p><strong>Customer:</strong> {customer}</p>
+                <p><strong>Unit:</strong> {unit}</p>
               </div>
             </div>
           </div>
