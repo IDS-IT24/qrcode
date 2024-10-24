@@ -115,7 +115,7 @@ export default function Home() {
           {/* Only the below section will be printed */}
           <div className="print-section">
             <div className="">
-              <p>{so}</p>
+              <p><strong>{so}</strong></p>
             </div>
             <div className="d-flex justify-content-center">
               <QRCode value={shortLink} size={128} className="qrcode" />
