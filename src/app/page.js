@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import QRCode from 'react-qr-code';
-import { db } from '../firebase'; // Assuming firebase.js is in the src directory
+import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
@@ -18,7 +18,6 @@ export default function Home() {
   const handleSubmit = async () => {
     let formattedUrl = url;
 
-    // Ensure the URL has http:// or https://
     if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
       formattedUrl = `http://${formattedUrl}`;
     }
@@ -27,17 +26,16 @@ export default function Home() {
     const localIP = 'https://qrcode-ids.vercel.app'; // Replace this with your actual deployed domain
     const newLink = `${localIP}/${slug}`;
 
-    // Store URL, password, slug, and additional information in Firestore
     try {
       await addDoc(collection(db, 'urls'), {
-        slug: slug,
+        slug,
         originalUrl: formattedUrl,
-        password: password,
-        divisi: divisi,
-        unit: unit,
-        customer: customer,
-        soa: soa,
-        so: so,
+        password,
+        divisi,
+        unit,
+        customer,
+        soa,
+        so,
       });
       setShortLink(newLink);
     } catch (error) {
@@ -46,7 +44,7 @@ export default function Home() {
   };
 
   const handlePrint = () => {
-    window.print(); // Trigger print functionality
+    window.print();
   };
 
   return (
@@ -117,14 +115,26 @@ export default function Home() {
             <div>
               <p><strong>Cust: {customer}</strong></p>
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="qr-container" style={{ position: 'relative', display: 'inline-block' }}>
               <QRCode value={shortLink} size={128} className="qrcode" />
-              <div className="mx-1 text-start">
-                <p><strong>Divisi:</strong> {divisi}</p>
-                <p><strong>Unit:</strong> {unit}</p>
-                <p><strong>SOA:</strong> {soa}</p>
-                <p><strong>SO:</strong> {so}</p>
-              </div>
+              <img
+                src="/ids-icon.png"
+                alt="Logo"
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '30px', // Adjust the logo size as needed
+                  height: '30px',
+                }}
+              />
+            </div>
+            <div className="mx-1 text-start">
+              <p><strong>Divisi:</strong> {divisi}</p>
+              <p><strong>Unit:</strong> {unit}</p>
+              <p><strong>SOA:</strong> {soa}</p>
+              <p><strong>SO:</strong> {so}</p>
             </div>
           </div>
           <button onClick={handlePrint} className="btn btn-primary mt-3">
