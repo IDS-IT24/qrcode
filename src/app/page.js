@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import QRCode from 'react-qr-code';
-import { db } from '../firebase';
+import { db } from '../firebase'; // Assuming firebase.js is in the src directory
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
@@ -18,6 +18,7 @@ export default function Home() {
   const handleSubmit = async () => {
     let formattedUrl = url;
 
+    // Ensure the URL has http:// or https://
     if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
       formattedUrl = `http://${formattedUrl}`;
     }
@@ -26,16 +27,17 @@ export default function Home() {
     const localIP = 'https://qrcode-ids.vercel.app'; // Replace this with your actual deployed domain
     const newLink = `${localIP}/${slug}`;
 
+    // Store URL, password, slug, and additional information in Firestore
     try {
       await addDoc(collection(db, 'urls'), {
-        slug,
+        slug: slug,
         originalUrl: formattedUrl,
-        password,
-        divisi,
-        unit,
-        customer,
-        soa,
-        so,
+        password: password,
+        divisi: divisi,
+        unit: unit,
+        customer: customer,
+        soa: soa,
+        so: so,
       });
       setShortLink(newLink);
     } catch (error) {
@@ -44,7 +46,7 @@ export default function Home() {
   };
 
   const handlePrint = () => {
-    window.print();
+    window.print(); // Trigger print functionality
   };
 
   return (
@@ -100,11 +102,11 @@ export default function Home() {
             onChange={(e) => setSo(e.target.value)}
             className="form-control mb-3"
           />
-        </div>
-        <div className="col-12 col-md-4 col-lg-2">
-          <button onClick={handleSubmit} className="btn btn-success btn-block">
-            Shorten URL
-          </button>
+          <div className="col-12 col-md-4 col-lg-2">
+            <button onClick={handleSubmit} className="btn btn-success btn-block">
+              Shorten URL
+            </button>
+          </div>
         </div>
       </div>
 
@@ -115,26 +117,14 @@ export default function Home() {
             <div>
               <p><strong>Cust: {customer}</strong></p>
             </div>
-            <div className="qr-container" style={{ position: 'relative', display: 'inline-block' }}>
+            <div className="d-flex justify-content-center">
               <QRCode value={shortLink} size={128} className="qrcode" />
-              <img
-                src="../app/ids-icon.png"
-                alt="Logo"
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '30px', // Adjust the logo size as needed
-                  height: '30px',
-                }}
-              />
-            </div>
-            <div className="mx-1 text-start">
-              <p><strong>Divisi:</strong> {divisi}</p>
-              <p><strong>Unit:</strong> {unit}</p>
-              <p><strong>SOA:</strong> {soa}</p>
-              <p><strong>SO:</strong> {so}</p>
+              <div className="mx-1 text-start">
+                <p><strong>Divisi: {divisi}</strong></p>
+                <p><strong>Unit: {unit}</strong></p>
+                <p><strong>SOA: {soa}</strong></p>
+                <p><strong>SO: {so}</strong></p>
+              </div>
             </div>
           </div>
           <button onClick={handlePrint} className="btn btn-primary mt-3">
