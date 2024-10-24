@@ -11,12 +11,13 @@
 }
 
 @media print {
+  /* Set the paper size to 70mm x 50mm */
   @page {
-    size: 50mm 30mm; /* Define exact label size */
-    margin: 0;       /* No margin */
+    size: 50mm 30mm;
+    margin: 0;
   }
 
-  /* Hide all elements except the print section */
+  /* Ensure all other elements are hidden except the QR code and details */
   body * {
     visibility: hidden;
   }
@@ -25,42 +26,37 @@
     visibility: visible;
   }
 
-  /* Define exact label area and enforce no overflow */
   .print-section {
     position: absolute;
     top: 0;
     left: 0;
     width: 50mm;
     height: 30mm;
-    padding: 0mm;     /* No padding */
+    padding: 1mm;
     box-sizing: border-box;
-    font-size: 8px;   /* Font size for small sticker */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Prevent content overflow */
+    font-size: 8px; /* Adjust font size to fit the small sticker */
   }
 
-  /* Adjust QR code size to fit in the label */
+  /* Adjust QR code size for small sticker */
   .print-section .qrcode {
     width: 20mm;
     height: 20mm;
-    margin-bottom: 1mm;
+    margin-bottom: 0mm;
   }
 
-  /* Prevent page breaks within the label */
+  /* Prevent page breaks inside the printable section */
   .print-section {
     page-break-inside: avoid;
   }
 
-  .print-section .logo-icon {
+  .print-section .logo-icon{
     width: 6px;
     height: 6px;
   }
 }
 
-/* General body styling */
+
+
 html,
 body {
   max-width: 100vw;
@@ -81,19 +77,16 @@ body {
   margin: 0;
 }
 
-/* Paragraph styling */
 p {
   margin-bottom: 0 !important;
 }
 
-/* Link styling */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Icon styling */
-.logo-icon {
+.logo-icon{
   width: 6px;
   height: 6px;
 }
