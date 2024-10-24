@@ -118,7 +118,7 @@ export default function Home() {
             <div className="qr-container" style={{ position: 'relative', display: 'inline-block' }}>
               <QRCode value={shortLink} size={128} className="qrcode" />
               <img
-                src="/ids-icon.png"
+                src="../app/ids-icon.png"
                 alt="Logo"
                 style={{
                   position: 'absolute',
