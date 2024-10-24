@@ -118,7 +118,7 @@ export default function Home() {
               <p><strong>Cust: {customer}</strong></p>
             </div>
             <div className="d-flex justify-content-center">
-              <div className='qr-container'>
+              <div className="qr-container">
                 <QRCode value={shortLink} size={128} className="qrcode" />
               </div>
               <div className="mx-1 text-start">

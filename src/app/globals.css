@@ -44,6 +44,11 @@
     margin-bottom: 0mm;
   }
 
+  .print-section .qrcode-container {
+    width: 128px;
+    height: 128px;
+  }
+
   /* Prevent page breaks inside the printable section */
   .print-section {
     page-break-inside: avoid;
