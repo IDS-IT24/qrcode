@@ -45,6 +45,7 @@
   }
 
   .print-section .qrcode-container {
+    margin-top: 5px;
     width: 128px;
     height: 128px;
   }

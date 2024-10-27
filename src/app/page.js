@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
-import { db } from '../firebase'; // Assuming firebase.js is in the src directory
+import { useRouter } from 'next/navigation'; // Next.js 13 App Router navigation
+import { getAuth } from 'firebase/auth';
+import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
@@ -14,30 +16,45 @@ export default function Home() {
   const [customer, setCustomer] = useState('');
   const [soa, setSoa] = useState('');
   const [so, setSo] = useState('');
+  const router = useRouter();
+  const auth = getAuth();
+
+  useEffect(() => {
+    // Redirect to login if the user is not authenticated
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        router.push('/login'); // Redirect to login page if not authenticated
+      }
+    });
+  }, []);
 
   const handleSubmit = async () => {
-    let formattedUrl = url;
+    const user = auth.currentUser;
+    if (!user) {
+      console.error('User not authenticated');
+      return;
+    }
 
-    // Ensure the URL has http:// or https://
+    let formattedUrl = url;
     if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
       formattedUrl = `http://${formattedUrl}`;
     }
 
-    const slug = Math.random().toString(36).substring(2, 8); // Generate a random slug
-    const localIP = 'https://qrcode-ids.vercel.app'; // Replace this with your actual deployed domain
+    const slug = Math.random().toString(36).substring(2, 8);
+    const localIP = 'https://qrcode-ids.vercel.app';
     const newLink = `${localIP}/${slug}`;
 
-    // Store URL, password, slug, and additional information in Firestore
     try {
       await addDoc(collection(db, 'urls'), {
-        slug: slug,
+        slug,
         originalUrl: formattedUrl,
-        password: password,
-        divisi: divisi,
-        unit: unit,
-        customer: customer,
-        soa: soa,
-        so: so,
+        password,
+        divisi,
+        unit,
+        customer,
+        soa,
+        so,
+        userId: user.uid, // Storing the authenticated user ID
       });
       setShortLink(newLink);
     } catch (error) {
@@ -46,7 +63,7 @@ export default function Home() {
   };
 
   const handlePrint = () => {
-    window.print(); // Trigger print functionality
+    window.print();
   };
 
   return (
@@ -112,7 +129,6 @@ export default function Home() {
 
       {shortLink && (
         <div className="mt-5">
-          {/* Only the below section will be printed */}
           <div className="print-section">
             <div>
               <p><strong>Cust: {customer}</strong></p>
