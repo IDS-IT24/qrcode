@@ -5,7 +5,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Next.js 13 App Router navigation
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { app } from '../firebase'; // Import your Firebase app config
+import { app } from '../../firebase'; // Import your Firebase app config
 
 export default function Login() {
   const auth = getAuth(app);
