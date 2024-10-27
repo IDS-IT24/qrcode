@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Next.js 13 App Router navigation
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../firebase'; // Firebase configuration file
+import { app } from '../../firebase'; // Firebase configuration file
 
 export default function Login() {
   const [email, setEmail] = useState(''); // State for email input
